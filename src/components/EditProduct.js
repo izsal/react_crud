@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 const EditProduct = () => {
     const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
+    const [body, setPrice] = useState('');
     const history = useHistory();
     const { id } = useParams();
 
@@ -12,7 +12,7 @@ const EditProduct = () => {
     }, []);
 
     const getProductById = async() => {
-        const response = await fetch(`http://localhost:8080/products/${id}`);
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
         const data = await response.json();
         setTitle(data.title);
         setPrice(data.price);
@@ -20,8 +20,8 @@ const EditProduct = () => {
 
     const updateProduct = async(e) => {
         e.preventDefault();
-        const product = { title, price };
-        await fetch(`http://localhost:8080/products/${id}`,{
+        const product = { title, body };
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{
             method: "PUT",
             body: JSON.stringify(product),
             headers:{
@@ -42,9 +42,9 @@ const EditProduct = () => {
                 </div>
 
                 <div className="field">
-                <label className="label">Price</label>
+                <label className="label">Description</label>
                 <div className="control">
-                    <input className="input" value={price} onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Price" />
+                    <input className="input" value={body} onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Description" />
                 </div>
                 </div>
         

@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 
 const AddProduct = () => {
     const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
+    const [body, setPrice] = useState('');
     const history = useHistory();
 
     const saveProduct = async(e) => {
         e.preventDefault();
-        const product = { title, price };
-        await fetch('http://localhost:8080/products',{
+        const product = { title, body, userId: 1 };
+        await fetch('https://jsonplaceholder.typicode.com/posts',{
             method: "POST",
             body: JSON.stringify(product),
             headers:{
@@ -30,9 +30,9 @@ const AddProduct = () => {
                 </div>
 
                 <div className="field">
-                <label className="label">Price</label>
+                <label className="label">Description</label>
                 <div className="control">
-                    <input className="input" value={price} onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Price" />
+                    <input className="input" value={body} onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Description" />
                 </div>
                 </div>
         

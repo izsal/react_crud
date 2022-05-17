@@ -9,13 +9,13 @@ const ProductList = () => {
     }, []);
 
     const fetchData = async() => {
-        const response = await fetch('http://localhost:8080/products');
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
         setProducts(data);
     }
 
     const deleteProduct = async(id) => {
-        await fetch(`http://localhost:8080/products/${id}`,{
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{
             method: "DELETE",
             headers:{
                 'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const ProductList = () => {
                     <tr>
                         <th>No</th>
                         <th>Title</th>
-                        <th>Price</th>
+                        <th>Description</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -41,7 +41,7 @@ const ProductList = () => {
                         <tr key={product.id}>
                             <td>{ index + 1 }</td>
                             <td>{ product.title }</td>
-                            <td>{ product.price }</td>
+                            <td>{ product.body }</td>
                             <td>
                                 <Link to={`/edit/${product.id}`} className="button is-small is-info">Edit</Link>
                                 <button onClick={() => deleteProduct(product.id)} className="button is-small is-danger">Delete</button>
